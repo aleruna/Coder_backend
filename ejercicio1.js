@@ -5,41 +5,40 @@ class Usuario {
     this.libros = libros;
     this.mascotas = mascotas;
   }
+
+  /*getter*/
   getFullName() {
-    console.log(`Gracias ${this.nombre} ${this.apellido} por ingresar`);
-  }
-  addMascota(mascota) {
-    this.mascotas.push(mascota);
-    console.log("Fue agregada " + mascota + " a la base");
-    console.log(this.mascotas);
-  }
-  countMascotas() {
-    let contar = this.mascotas.length;
-    console.log(contar);
+    return `Gracias ${this.nombre} ${this.apellido} por ingresar`;
   }
 
   addBook(nombre, autor) {
-    var diccionario = { nombre, autor };
-    this.libros.push(diccionario);
+    return this.libros.push({ nombre: nombre, autor: autor });
   }
+
+  countMascotas() {
+    return this.mascotas.length;
+  }
+
+  /*setter*/
+  addMascota(mascota) {
+    this.mascotas.push(mascota);
+  }
+
   getBookNames() {
-    const indexed = this.libros.map((libros) => libros.nombre);
-    console.log(indexed);
+    return this.libros.map((libros) => libros.nombre);
   }
 }
 
-console.log("Alejandra Elisei");
+const usuario = new Usuario("usuario1", "apellido1", [], []);
 
-const usuario = new Usuario(
-  "dino",
-  "saurio",
-  [
-    { nombre: "bla", autor: "blade" },
-    { nombre: "ro", autor: "sa" },
-  ],
-  ["lagarto", "iguana"]
-);
-usuario.getFullName();
+console.log(usuario.getFullName());
+
 usuario.addMascota("sapo");
-usuario.addBook("mar", "costa");
-usuario.getBookNames();
+usuario.addBook("casa usher", "edgar allan poe");
+usuario.addBook("el gato negro", "edgar allan poe");
+
+console.log(usuario.getBookNames());
+
+console.log(usuario.countMascotas());
+
+console.log("Alejandra Elisei");
