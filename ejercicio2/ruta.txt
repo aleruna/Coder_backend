@@ -1,0 +1,8 @@
+metodo save:
+    - debe checkear que el objeto no exista previamente, si no existe crearlo (crear funcion )
+    - Si lo crea , asignar ID considerando el ultimo ID y agregar uno
+    - Creo funcion maxid
+    - crear funcion de extraccion de datos
+    
+
+    

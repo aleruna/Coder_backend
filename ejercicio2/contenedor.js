@@ -1,36 +1,10 @@
 const fs = require("fs");
 
-class Contenedor {
+module.exports = class Contenedor {
   constructor(filename) {
     this.filename = filename; /*path??*/
-    this.data = []; /*objeto*/
-  }
-
-  /* funcion para crear el archivo */
-  createfile(obj) {
-    try {
-      obj.id = this.maxID + 1; /*necesita verificar que sea 1 + maxid */
-      this.data.push(obj);
-      await fs.promises.writeFile(
-        this.filename,
-        this.data
-      ); /* no termino de entender bien el correcto uso de await?????*/
-      console.log(
-        `Se agrega "${obj.title}" con "${obj.id}" a la base "${this.filename}"`
-      );
-      return obj.id;
-    } catch (err) {
-      console.log(`Error al crear Archivo`);
-    }
-  }
-  /*verifica cual es el max id*/
-  maxID() {
-    arrayan = this.data;
-    const ids = arr.map((arrayan) => {
-      return arrayan.id;
-    });
-    const max = Math.max.apply(null, ids);
-    return max;
+    this.productos = []; /*productos*/
+    this.id = 0; /*inicio en cero para ir aumentando*/
   }
 
   /*LEctura del archivo*/
@@ -43,16 +17,16 @@ class Contenedor {
     }
   }
 
-  async save(obj) {
+  /*Funcion de guardado*/
+  async save(producto) {
+    this.id++;
+    producto.id = this.id;
+    let item = this.productos.push(producto);
     try {
-      if (!fs.existsSync(this.filename)) {
-        return this.createFile(obj);
-      } else {
-        this.data = await this.getAll();
-        return this.createFile(obj);
-      }
+      fs.writeFile(this.filename, item);
+      return producto.id;
     } catch (err) {
-      console.log("Error");
+      console.log("Error al crear Archivo");
     }
   }
-}
+};
